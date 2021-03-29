@@ -25,10 +25,7 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-    if message.content.startswith("!gay"):
-        
-        img_url = getImage()
-        await message.channel.send(img_url)
+  
 @tasks.loop(hours=24)
 async def sendMakeleio():
     await client.wait_until_ready()
