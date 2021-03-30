@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-from discord import channel
 from requests import  get
 import discord
 from discord.ext import tasks
