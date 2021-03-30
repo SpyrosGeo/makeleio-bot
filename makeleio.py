@@ -1,4 +1,3 @@
-from dis import disco
 from bs4 import BeautifulSoup
 from discord import channel
 from requests import  get
