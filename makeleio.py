@@ -1,17 +1,16 @@
 #!/home/thatguy/makeleio-bot/bin/python3
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 from requests import  get
 import discord
 from discord.ext import tasks
-import os 
+import os
 from dotenv import load_dotenv
 
-from getDay import findDay
+from getDay import findDay,getDate
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-BASE_URL="https://www.naftemporiki.gr"
-URL ="https://www.naftemporiki.gr/frontpages/latest/imerisies-politikes/makeleio/full"
+BASE_URL="https://www.protoselidaefimeridon.gr/efimerides/"
 
 client = discord.Client()
 
@@ -25,7 +24,6 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-  
 @tasks.loop(hours=12)
 async def sendMakeleio():
 
@@ -38,8 +36,11 @@ async def sendMakeleio():
     await channel.send(  img_url)
 
 def getImage():
-    res = get(URL)
-    soup = BeautifulSoup(res.text,"html.parser")
-    imgs = soup.find_all("img",{"id":"fullImg"})
-    return BASE_URL+imgs[0]['src']
+    date =getDate()
+    URL  = f"{BASE_URL}{date}/makelio.JPG"
+    #res = get(URL)
+    #soup = BeautifulSoup(res.text,"html.parser")
+    #imgs = soup.find_all("img",{"id":"fullImg"})
+    #return BASE_URL+imgs[0]['src']
+    return URL
 client.run(TOKEN)
